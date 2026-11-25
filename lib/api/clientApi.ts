@@ -1,4 +1,4 @@
-import {
+import type {
   CreateDiaryEntryRequest,
   CreateTaskRequest,
   GetDiaryParams,
@@ -11,34 +11,35 @@ import {
   UpdateTaskStatusRequest,
 } from "@/types/api";
 import { api } from "./api";
+import { proxyApi } from "./proxyApi";
 
 export const register = async (data: RegisterRequest) => {
-  const response = await api.post("/auth/register", data);
+  const response = await proxyApi.post("/auth/register", data);
   return response.data;
 };
 
 export const login = async (data: LoginRequest) => {
-  const response = await api.post("/auth/login", data);
+  const response = await proxyApi.post("/auth/login", data);
   return response.data;
 };
 
 export const logout = async () => {
-  const response = await api.post("/auth/logout");
+  const response = await proxyApi.post("/auth/logout");
   return response.data;
 };
 
 export const getSession = async () => {
-  const response = await api.get("/auth/session");
+  const response = await proxyApi.get("/auth/session");
   return response.data;
 };
 
 export const getMe = async () => {
-  const response = await api.get("/users/current");
+  const response = await proxyApi.get("/users/current");
   return response.data;
 };
 
 export const updateMe = async (data: UpdateMeRequest) => {
-  const response = await api.patch("/users/current", data);
+  const response = await proxyApi.patch("/users/current", data);
   return response.data;
 };
 
@@ -46,7 +47,7 @@ export const uploadAvatar = async (file: File) => {
   const formData = new FormData();
   formData.append("avatar", file);
 
-  const response = await api.patch("/users/current/avatars", formData);
+  const response = await proxyApi.patch("/users/current/avatar", formData);
   return response.data;
 };
 
