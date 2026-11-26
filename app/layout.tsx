@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lato, Comfortaa } from "next/font/google";
 import "./globals.css";
 import "modern-normalize/modern-normalize.css";
+import { Toaster } from "react-hot-toast";
 
 const lato = Lato({
   weight: ["400", "700"],
@@ -29,7 +30,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en" className={`${lato.variable} ${comfortaa.variable}`}>
-      <body>{children}</body>
+      <body>
+        <Toaster position="top-right" />
+        {children}
+      </body>
     </html>
   );
 }
