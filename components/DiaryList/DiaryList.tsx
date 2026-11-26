@@ -1,26 +1,16 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { getDiary } from "@/lib/api/clientApi";
 import DiaryEntryCard from "@/components/DiaryEntryCard/DiaryEntryCard";
-import type { DiaryEntry, DiaryListResponse } from "@/types/diary";
+import type { DiaryEntry } from "@/types/diary";
+import { useDiaryEntries } from "./useDiaryEntries";
 import styles from "./DiaryList.module.css";
-
-const DIARY_PARAMS = { limit: 100, sortOrder: "desc" } as const;
 
 interface DiaryListProps {
   onSelectEntry?: (entry: DiaryEntry) => void;
 }
 
 export default function DiaryList({ onSelectEntry }: DiaryListProps) {
-  const {
-    data,
-    isLoading,
-    isError: hasError,
-  } = useQuery<DiaryListResponse>({
-    queryKey: ["diary", DIARY_PARAMS],
-    queryFn: () => getDiary(DIARY_PARAMS),
-  });
+  const { data, isLoading, isError: hasError } = useDiaryEntries();
 
   const entries = data?.tasks ?? [];
 
