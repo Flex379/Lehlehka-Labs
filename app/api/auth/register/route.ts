@@ -8,9 +8,12 @@ export async function POST(request: Request) {
 
     const response = await api.post("/auth/register", body);
 
-    const nextResponse = NextResponse.json(response.data, {
-      status: response.status,
-    });
+    const nextResponse =
+      response.status === 204
+        ? new NextResponse(null, { status: 204 })
+        : NextResponse.json(response.data, {
+            status: response.status,
+          });
 
     const setCookies = response.headers["set-cookie"];
 
@@ -22,8 +25,12 @@ export async function POST(request: Request) {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       return NextResponse.json(
-        error.response?.data ?? { message: "Registration failed" },
-        { status: error.response?.status ?? 500 },
+        error.response?.data ?? {
+          message: "Registration failed",
+        },
+        {
+          status: error.response?.status ?? 500,
+        },
       );
     }
 
