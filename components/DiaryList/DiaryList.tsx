@@ -1,31 +1,16 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { getDiary } from "@/lib/api/clientApi";
-import type { DiaryListResponse } from "@/types/diary";
+import DiaryEntryCard from "@/components/DiaryEntryCard/DiaryEntryCard";
+import type { DiaryEntry } from "@/types/diary";
+import { useDiaryEntries } from "./useDiaryEntries";
 import styles from "./DiaryList.module.css";
 
-const DIARY_PARAMS = { limit: 100, sortOrder: "desc" } as const;
-
-function formatDate(value: string): string {
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return value;
-  return date.toLocaleDateString("uk-UA", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+interface DiaryListProps {
+  onSelectEntry?: (entry: DiaryEntry) => void;
 }
 
-export default function DiaryList() {
-  const {
-    data,
-    isLoading,
-    isError: hasError,
-  } = useQuery<DiaryListResponse>({
-    queryKey: ["diary", DIARY_PARAMS],
-    queryFn: () => getDiary(DIARY_PARAMS),
-  });
+export default function DiaryList({ onSelectEntry }: DiaryListProps) {
+  const { data, isLoading, isError: hasError } = useDiaryEntries();
 
   const entries = data?.tasks ?? [];
 
@@ -56,18 +41,8 @@ export default function DiaryList() {
       {!isLoading && !hasError && entries.length > 0 && (
         <ul className={styles.items}>
           {entries.map((entry) => (
-            <li key={entry._id} className={styles.card}>
-              <div className={styles.cardTop}>
-                <p className={styles.cardTitle}>{entry.title}</p>
-                <p className={styles.cardDate}>{formatDate(entry.date)}</p>
-              </div>
-              <ul className={styles.tags}>
-                {entry.emotions.map((emotion) => (
-                  <li key={emotion._id} className={styles.tag}>
-                    {emotion.title}
-                  </li>
-                ))}
-              </ul>
+            <li key={entry._id}>
+              <DiaryEntryCard entry={entry} onSelect={onSelectEntry} />
             </li>
           ))}
         </ul>

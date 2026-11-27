@@ -45,46 +45,15 @@
   gap: 16px;
 }
 
-.card {
-  background: var(--color-scheme-foreground-alt, #ffdae0);
-  border-radius: 16px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+/* Десктоп: фіксована висота блоку, скрол лише всередині списку */
+@media screen and (min-width: 1024px) {
+  .list {
+    height: 100%;
+  }
 
-.cardTop {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-
-.cardTitle {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.cardDate {
-  margin: 0;
-  font-size: 12px;
-  white-space: nowrap;
-}
-
-.tags {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.tag {
-  background: var(--color-scheme-foreground, #fff4f6);
-  border-radius: 100px;
-  padding: 2px 12px;
-  font-size: 14px;
+  .items {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+  }
 }
