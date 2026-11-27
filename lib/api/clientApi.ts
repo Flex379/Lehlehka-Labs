@@ -93,7 +93,7 @@ export const deleteDiaryEntry = async (noteId: string) => {
 };
 
 export const getGreeting = async () => {
-  const response = await api.get("/weeks/greeting");
+  const response = await proxyApi.get("/weeks/greeting");
   return response.data;
 };
 
@@ -103,12 +103,12 @@ export const getPublicGreeting = async () => {
 };
 
 export const getBabyWeek = async (weekNumber: number) => {
-  const response = await api.get(`/weeks/${weekNumber}/baby`);
+  const response = await proxyApi.get(`/weeks/${weekNumber}/baby`);
   return response.data;
 };
 
 export const getMomWeek = async (weekNumber: number) => {
-  const response = await api.get(`/weeks/${weekNumber}/mom`);
+  const response = await proxyApi.get(`/weeks/${weekNumber}/mom`);
   return response.data;
 };
 

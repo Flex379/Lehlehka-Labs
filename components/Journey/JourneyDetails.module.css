@@ -1,0 +1,316 @@
+.details {
+  min-width: 0;
+}
+
+.tabs {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin: 0 auto 16px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--color-pastel-pink-lighter);
+}
+
+.tab,
+.activeTab {
+  min-height: 36px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--color-neutral-darkest);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.2;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease;
+}
+
+.activeTab {
+  background: var(--color-pastel-pink);
+}
+
+.tab:focus-visible,
+.activeTab:focus-visible,
+.error button:focus-visible {
+  outline: 3px solid var(--color-pastel-pink-dark);
+  outline-offset: 2px;
+}
+
+.panel {
+  min-width: 0;
+}
+
+.babyCard,
+.card {
+  min-width: 0;
+  border-radius: 16px;
+  background: var(--color-pastel-pink-lighter);
+}
+
+.babyCard {
+  display: grid;
+  gap: 16px;
+  padding: 12px;
+}
+
+.babyMedia {
+  min-width: 0;
+}
+
+.illustration {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--color-oasis-lighter);
+}
+
+.babyImage {
+  object-fit: contain;
+  padding: 12px;
+}
+
+.imageCaption {
+  margin-top: 8px;
+  color: var(--color-neutral-darkest);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.babyCopy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.description {
+  display: grid;
+  gap: 10px;
+  color: var(--color-neutral-darkest);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.factCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--color-pastel-pink-light);
+}
+
+.factIcon {
+  flex: 0 0 16px;
+}
+
+.factCard h2,
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.factCard h2 {
+  font-family: var(--font-family);
+}
+
+.card h2 {
+  font-family: var(--second-family);
+}
+
+.factCard p,
+.card > p,
+.tip p {
+  color: var(--color-neutral-darkest);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.momGrid {
+  display: grid;
+  gap: 16px;
+}
+
+.card {
+  padding: 16px;
+}
+
+.states {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.states li {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--color-pastel-pink-light);
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.tips {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tip {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+}
+
+.tipIcon {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+}
+
+.tipIcon svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.tip h3 {
+  margin: 0 0 3px;
+  font-family: var(--font-family);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.status {
+  display: flex;
+  min-height: 240px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--color-neutral-dark);
+  text-align: center;
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  border: 3px solid var(--color-pastel-pink-light);
+  border-top-color: var(--color-pastel-pink-dark);
+  border-radius: 50%;
+  animation: spin 750ms linear infinite;
+}
+
+.error {
+  display: grid;
+  min-height: 240px;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  color: var(--color-neutral-dark);
+  text-align: center;
+}
+
+.error button {
+  padding: 9px 16px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--color-pastel-pink-darkest);
+  background: var(--color-pastel-pink);
+  font-weight: 700;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .babyCard {
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .illustration {
+    aspect-ratio: 16 / 9;
+  }
+
+  .momGrid {
+    gap: 16px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tabs {
+    max-width: 460px;
+    margin-bottom: 16px;
+  }
+
+  .babyCard {
+    height: 360px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 16px;
+    overflow: hidden;
+    padding: 16px;
+  }
+
+  .babyMedia {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+  }
+
+  .illustration {
+    min-height: 0;
+    flex: 1;
+    aspect-ratio: auto;
+  }
+
+  .babyCopy {
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+
+  .momGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    height: 360px;
+    overflow-y: auto;
+    padding: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab,
+  .activeTab {
+    transition: none;
+  }
+
+  .spinner {
+    animation-duration: 2s;
+  }
+}
