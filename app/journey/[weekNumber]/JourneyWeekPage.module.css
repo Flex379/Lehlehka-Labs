@@ -1,11 +1,11 @@
 .page {
   display: grid;
-  width: min(100%, 1128px);
+  width: min(100vw, 1128px);
   min-height: 100vh;
   margin: 0 auto;
   align-content: start;
   gap: 32px;
-  padding: 24px 32px;
+  padding: 24px 20px;
 }
 
 .status {
@@ -36,4 +36,11 @@
   color: var(--color-pastel-pink-darkest);
   background: var(--color-pastel-pink);
   font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
 }
