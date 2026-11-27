@@ -53,3 +53,34 @@ export interface GetEmotionsParams {
   page?: number;
   limit?: number;
 }
+
+export interface WeekGreetingResponse {
+  curWeekToPregnant: number;
+  daysBeforePregnant: number;
+  babyToday: {
+    babySize: number;
+    babyWeight: number;
+    babyActivity: string;
+    babyDevelopment: string;
+    image: string;
+  };
+  momHint: string;
+}
+
+export interface BabyWeekResponse {
+  analogy: string;
+  image: string;
+  description: string[];
+  interestingFact: string;
+}
+
+export interface MomWeekResponse {
+  feelings: {
+    states: string[];
+    sensationDescr: string;
+  };
+  comfortTips: {
+    category: string;
+    tip: string;
+  }[];
+}
