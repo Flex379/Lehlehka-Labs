@@ -1,5 +1,7 @@
 .selector {
+  width: calc(100% + 40px);
   min-width: 0;
+  margin-left: -20px;
 }
 
 .scroller {
@@ -17,23 +19,22 @@
   display: flex;
   width: max-content;
   gap: 16px;
-  padding: 0 2px 4px;
 }
 
 .week {
   display: flex;
-  width: 56px;
-  height: 64px;
-  flex: 0 0 56px;
+  width: 97px;
+  height: 87px;
+  flex: 0 0 97px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 3px;
-  padding: 6px 2px;
-  border: 1px solid transparent;
+  padding: 4px 8px;
+  border: 4px solid transparent;
   border-radius: 16px;
   color: var(--color-neutral-darkest);
-  background: #f7f7f7;
+  background: var(--color-neutral-lightest);
   transition:
     background-color 160ms ease,
     border-color 160ms ease,
@@ -57,7 +58,6 @@
 .selected:not(.current) {
   border-color: var(--color-pastel-pink);
   background: var(--color-pastel-pink-light);
-  box-shadow: inset 0 0 0 1px var(--color-pastel-pink-dark);
 }
 
 .future {
@@ -67,25 +67,28 @@
 }
 
 .number {
-  font-family: var(--font-family);
-  font-size: 16px;
+  font-family: var(--second-family);
+  font-size: 32px;
   font-weight: 700;
   line-height: 1.1;
 }
 
 .caption {
-  font-size: 10px;
+  font-family: var(--font-family);
+  font-size: 16px;
   line-height: 1.2;
 }
 
 @media (min-width: 768px) {
-  .weeks {
-    gap: 16px;
+  .selector {
+    width: calc(100% + 64px);
+    margin-left: -32px;
   }
+}
 
+@media (min-width: 1024px) {
   .week {
-    width: 58px;
-    flex-basis: 58px;
+    height: 101px;
   }
 }
 

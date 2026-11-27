@@ -130,13 +130,13 @@ function BabyContent({ data }: { data: BabyWeekResponse }) {
         </div>
         {data.interestingFact && (
           <aside className={styles.factCard}>
-            <Image
-              src="/journey/sparkles.svg"
-              alt=""
-              width={16}
-              height={16}
+            <svg
               className={styles.factIcon}
-            />
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <use href="/icons-sprite.svg#icon-star-shine" />
+            </svg>
             <div>
               <h2>Цікавий факт тижня</h2>
               <p>{data.interestingFact}</p>
