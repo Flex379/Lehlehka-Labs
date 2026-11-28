@@ -14,7 +14,7 @@ export default function DiaryPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [editingEntry, setEditingEntry] = useState<DiaryEntry | null>(null);
 
-  const entries = data?.tasks ?? [];
+  const entries = data?.diaryNotes ?? [];
   // Поки нічого не вибрано, на десктопі показуємо перший запис.
   const selectedEntry =
     entries.find((entry) => entry._id === selectedId) ?? entries[0] ?? null;

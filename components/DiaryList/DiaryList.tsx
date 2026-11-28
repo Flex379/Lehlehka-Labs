@@ -15,7 +15,7 @@ export default function DiaryList({ onSelectEntry }: DiaryListProps) {
   const { data, isLoading, isError: hasError } = useDiaryEntries();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  const entries = data?.tasks ?? [];
+  const entries = data?.diaryNotes ?? [];
 
   return (
     <section className={styles.list}>

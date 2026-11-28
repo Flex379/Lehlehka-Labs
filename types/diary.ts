@@ -11,9 +11,9 @@ export interface DiaryEntry {
   emotions: DiaryEmotion[];
 }
 
-// Бекенд повертає записи в полі "tasks" (так записано в api-docs).
+// У api-docs помилково вказано "tasks", реальний бекенд віддає "diaryNotes".
 export interface DiaryListResponse {
-  tasks: DiaryEntry[];
+  diaryNotes: DiaryEntry[];
   totalCount: number;
   totalPages: number;
   page: number;

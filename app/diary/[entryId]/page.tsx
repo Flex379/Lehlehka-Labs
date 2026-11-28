@@ -13,7 +13,7 @@ export default function DiaryEntryPage() {
   const { data, isLoading, isError } = useDiaryEntries();
   const [editingEntry, setEditingEntry] = useState<DiaryEntry | null>(null);
 
-  const entry = data?.tasks.find((item) => item._id === entryId);
+  const entry = data?.diaryNotes.find((item) => item._id === entryId);
 
   return (
     <main className={styles.page}>
