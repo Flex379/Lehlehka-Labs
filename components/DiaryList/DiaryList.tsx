@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import DiaryEntryCard from "@/components/DiaryEntryCard/DiaryEntryCard";
+import AddDiaryEntryModal from "@/components/AddDiaryEntryModal/AddDiaryEntryModal";
 import type { DiaryEntry } from "@/types/diary";
 import { useDiaryEntries } from "./useDiaryEntries";
 import styles from "./DiaryList.module.css";
@@ -11,6 +13,7 @@ interface DiaryListProps {
 
 export default function DiaryList({ onSelectEntry }: DiaryListProps) {
   const { data, isLoading, isError: hasError } = useDiaryEntries();
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   const entries = data?.tasks ?? [];
 
@@ -20,7 +23,11 @@ export default function DiaryList({ onSelectEntry }: DiaryListProps) {
 
       <div className={styles.header}>
         <h2 className={styles.title}>Ваші записи</h2>
-        <button type="button" className={styles.addButton}>
+        <button
+          type="button"
+          className={styles.addButton}
+          onClick={() => setIsAddModalOpen(true)}
+        >
           Новий запис
           <svg width="24" height="24" aria-hidden="true">
             <use href="/icons-sprite.svg#icon-add-circle" />
@@ -46,6 +53,10 @@ export default function DiaryList({ onSelectEntry }: DiaryListProps) {
             </li>
           ))}
         </ul>
+      )}
+
+      {isAddModalOpen && (
+        <AddDiaryEntryModal onClose={() => setIsAddModalOpen(false)} />
       )}
     </section>
   );
