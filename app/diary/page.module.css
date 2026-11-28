@@ -1,19 +1,31 @@
 .page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   padding: 24px 20px;
 }
 
-/* На мобілці й планшеті деталі відкриваються на /diary/[entryId] */
 .detailsColumn {
   display: none;
 }
 
+@media screen and (min-width: 768px) {
+  .page {
+    padding: 32px;
+  }
+}
+
 @media screen and (min-width: 1024px) {
   .page {
+    gap: 32px;
+    padding: 32px;
+  }
+
+  .content {
     display: grid;
     grid-template-columns: 388px 1fr;
     gap: 32px;
     height: 727px;
-    padding: 32px;
   }
 
   .listColumn,
