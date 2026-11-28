@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getBabyWeek, getMomWeek } from "@/lib/api/clientApi";
 import { journeyQueryKeys } from "@/lib/queries/journey";
+import TasksReminderCard from "@/components/TasksReminderCard/TasksReminderCard";
 import type { BabyWeekResponse, MomWeekResponse } from "@/types/api";
 import styles from "./JourneyDetails.module.css";
 
@@ -152,36 +153,39 @@ function BabyContent({ data }: { data: BabyWeekResponse }) {
 function MomContent({ data }: { data: MomWeekResponse }) {
   return (
     <div className={styles.momGrid}>
-      <article className={`${styles.card} ${styles.momCard}`}>
-        <h2>Як ви можете почуватись</h2>
-        {data.feelings.states.length > 0 && (
-          <ul className={styles.states}>
-            {data.feelings.states.map((state) => (
-              <li key={state}>{state}</li>
+      <div className={styles.momInfo}>
+        <article className={`${styles.card} ${styles.momCard}`}>
+          <h2>Як ви можете почуватись</h2>
+          {data.feelings.states.length > 0 && (
+            <ul className={styles.states}>
+              {data.feelings.states.map((state) => (
+                <li key={state}>{state}</li>
+              ))}
+            </ul>
+          )}
+          <p>{data.feelings.sensationDescr}</p>
+        </article>
+
+        <article className={`${styles.card} ${styles.tipsCard}`}>
+          <h2>Поради для вашого комфорту</h2>
+          <ul className={styles.tips}>
+            {data.comfortTips.map(({ category, tip }, index) => (
+              <li className={styles.tip} key={`${category}-${index}`}>
+                <span className={styles.tipIcon} aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <use href={`/icons-sprite.svg#${getTipIcon(category)}`} />
+                  </svg>
+                </span>
+                <div>
+                  <h3>{category}</h3>
+                  <p>{tip}</p>
+                </div>
+              </li>
             ))}
           </ul>
-        )}
-        <p>{data.feelings.sensationDescr}</p>
-      </article>
-
-      <article className={`${styles.card} ${styles.tipsCard}`}>
-        <h2>Поради для вашого комфорту</h2>
-        <ul className={styles.tips}>
-          {data.comfortTips.map(({ category, tip }, index) => (
-            <li className={styles.tip} key={`${category}-${index}`}>
-              <span className={styles.tipIcon} aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <use href={`/icons-sprite.svg#${getTipIcon(category)}`} />
-                </svg>
-              </span>
-              <div>
-                <h3>{category}</h3>
-                <p>{tip}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </article>
+        </article>
+      </div>
+      <TasksReminderCard />
     </div>
   );
 }
