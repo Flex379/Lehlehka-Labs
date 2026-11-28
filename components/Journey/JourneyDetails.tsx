@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getBabyWeek, getMomWeek } from "@/lib/api/clientApi";
+import { journeyQueryKeys } from "@/lib/queries/journey";
 import type { BabyWeekResponse, MomWeekResponse } from "@/types/api";
 import styles from "./JourneyDetails.module.css";
 
@@ -16,12 +17,12 @@ interface JourneyDetailsProps {
 export default function JourneyDetails({ weekNumber }: JourneyDetailsProps) {
   const [activeTab, setActiveTab] = useState<JourneyTab>("baby");
   const babyQuery = useQuery<BabyWeekResponse>({
-    queryKey: ["journey", weekNumber, "baby"],
+    queryKey: journeyQueryKeys.babyWeek(weekNumber),
     queryFn: () => getBabyWeek(weekNumber),
     enabled: activeTab === "baby",
   });
   const momQuery = useQuery<MomWeekResponse>({
-    queryKey: ["journey", weekNumber, "mom"],
+    queryKey: journeyQueryKeys.momWeek(weekNumber),
     queryFn: () => getMomWeek(weekNumber),
     enabled: activeTab === "mom",
   });
