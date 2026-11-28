@@ -5,7 +5,10 @@ import GreetingBlock from "@/components/Journey/GreetingBlock";
 import DiaryList from "@/components/DiaryList/DiaryList";
 import DiaryEntryDetails from "@/components/DiaryEntryDetails/DiaryEntryDetails";
 import AddDiaryEntryModal from "@/components/AddDiaryEntryModal/AddDiaryEntryModal";
-import { useDiaryEntries } from "@/components/DiaryList/useDiaryEntries";
+import {
+  useDeleteDiaryEntry,
+  useDiaryEntries,
+} from "@/components/DiaryList/useDiaryEntries";
 import type { DiaryEntry } from "@/types/diary";
 import styles from "./page.module.css";
 
@@ -15,9 +18,16 @@ export default function DiaryPage() {
   const [editingEntry, setEditingEntry] = useState<DiaryEntry | null>(null);
 
   const entries = data?.diaryNotes ?? [];
-  // Поки нічого не вибрано, на десктопі показуємо перший запис.
   const selectedEntry =
     entries.find((entry) => entry._id === selectedId) ?? entries[0] ?? null;
+
+  const deleteMutation = useDeleteDiaryEntry();
+  const handleDelete = (entry: DiaryEntry) => {
+    if (!window.confirm("Видалити запис?")) return;
+    deleteMutation.mutate(entry._id, {
+      onSuccess: () => setSelectedId(null),
+    });
+  };
 
   return (
     <main className={styles.page}>
@@ -33,6 +43,7 @@ export default function DiaryPage() {
             <DiaryEntryDetails
               entry={selectedEntry}
               onEdit={setEditingEntry}
+              onDelete={handleDelete}
             />
           </div>
         )}
