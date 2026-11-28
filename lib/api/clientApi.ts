@@ -117,23 +117,9 @@ export const getEmotions = async (
   params?: GetEmotionsParams,
 ): Promise<DiaryEmotion[]> => {
   const response = await api.get<
-    | Array<Pick<DiaryEmotion, "_id"> & { name?: string; title?: string }>
-    | {
-        emotions?: Array<
-          Pick<DiaryEmotion, "_id"> & { name?: string; title?: string }
-        >;
-        tasks?: Array<
-          Pick<DiaryEmotion, "_id"> & { name?: string; title?: string }
-        >;
-      }
+    DiaryEmotion[] | { emotions?: DiaryEmotion[]; tasks?: DiaryEmotion[] }
   >("/emotions", { params });
 
-  const emotions = Array.isArray(response.data)
-    ? response.data
-    : response.data.emotions ?? response.data.tasks ?? [];
-
-  return emotions.map(({ _id, name, title }) => ({
-    _id,
-    title: title ?? name ?? "",
-  }));
+  if (Array.isArray(response.data)) return response.data;
+  return response.data.emotions ?? response.data.tasks ?? [];
 };
