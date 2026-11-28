@@ -53,12 +53,12 @@ export const uploadAvatar = async (file: File) => {
 };
 
 export const createTask = async (data: CreateTaskRequest) => {
-  const response = await api.post("/tasks", data);
+  const response = await proxyApi.post("/tasks", data);
   return response.data;
 };
 
 export const getTasks = async (params?: GetTasksParams) => {
-  const response = await api.get("/tasks", { params });
+  const response = await proxyApi.get("/tasks", { params });
   return response.data;
 };
 
@@ -66,7 +66,7 @@ export const updateTaskStatus = async (
   taskId: string,
   data: UpdateTaskStatusRequest,
 ) => {
-  const response = await api.patch(`/tasks/status/${taskId}`, data);
+  const response = await proxyApi.patch(`/tasks/status/${taskId}`, data);
   return response.data;
 };
 
