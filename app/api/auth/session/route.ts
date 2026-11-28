@@ -12,15 +12,31 @@ export async function GET(request: Request) {
       },
     });
 
-    return NextResponse.json(response.data, {
+    const nextResponse = NextResponse.json(response.data, {
       status: response.status,
     });
+
+    const setCookies = response.headers["set-cookie"];
+
+    setCookies?.forEach((cookie) => {
+      nextResponse.headers.append("Set-Cookie", cookie);
+    });
+
+    return nextResponse;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      return NextResponse.json(
+      const nextResponse = NextResponse.json(
         error.response?.data ?? { message: "Session check failed" },
         { status: error.response?.status ?? 500 },
       );
+
+      const setCookies = error.response?.headers?.["set-cookie"];
+
+      setCookies?.forEach((cookie) => {
+        nextResponse.headers.append("Set-Cookie", cookie);
+      });
+
+      return nextResponse;
     }
 
     return NextResponse.json(
