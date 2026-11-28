@@ -10,6 +10,7 @@ import type {
   UpdateMeRequest,
   UpdateTaskStatusRequest,
 } from "@/types/api";
+import type { DiaryEmotion } from "@/types/diary";
 import { api } from "./api";
 import { proxyApi } from "./proxyApi";
 
@@ -112,7 +113,13 @@ export const getMomWeek = async (weekNumber: number) => {
   return response.data;
 };
 
-export const getEmotions = async (params?: GetEmotionsParams) => {
-  const response = await api.get("/emotions", { params });
-  return response.data;
+export const getEmotions = async (
+  params?: GetEmotionsParams,
+): Promise<DiaryEmotion[]> => {
+  const response = await api.get<
+    DiaryEmotion[] | { emotions?: DiaryEmotion[]; tasks?: DiaryEmotion[] }
+  >("/emotions", { params });
+
+  if (Array.isArray(response.data)) return response.data;
+  return response.data.emotions ?? response.data.tasks ?? [];
 };
