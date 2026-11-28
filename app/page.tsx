@@ -1,5 +1,10 @@
 import styles from "./page.module.css";
 
 export default function Home() {
-  return <div>Project</div>;
+  return (
+    <div>
+      ааріа аіщаошіоа
+      <p>НВгрцнашгт</p>
+    </div>
+  );
 }

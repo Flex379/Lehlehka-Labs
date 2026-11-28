@@ -1,14 +1,35 @@
 import type { Metadata } from "next";
-import { Lato, Comfortaa } from "next/font/google";
+import localFont from "next/font/local";
+import { Comfortaa } from "next/font/google";
 import "./globals.css";
 import "modern-normalize/modern-normalize.css";
 import { Toaster } from "react-hot-toast";
 
-const lato = Lato({
-  weight: ["400", "700"],
+const lato = localFont({
+  src: [
+    {
+      path: "../fonts/Lato-Light.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Lato-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Lato-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Lato-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
   variable: "--font-lato-source",
   display: "swap",
-  subsets: ["latin"],
 });
 
 const comfortaa = Comfortaa({
