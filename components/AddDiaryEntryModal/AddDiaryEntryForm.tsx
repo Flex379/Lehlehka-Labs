@@ -8,6 +8,16 @@ import { getEmotions } from "@/lib/api/clientApi";
 import type { DiaryEntry } from "@/types/diary";
 import styles from "./AddDiaryEntryModal.module.css";
 
+interface EmotionApiItem {
+  _id: string;
+  name?: string;
+  title?: string;
+}
+
+type EmotionApiResponse =
+  | EmotionApiItem[]
+  | { emotions?: EmotionApiItem[]; tasks?: EmotionApiItem[] };
+
 export interface DiaryEntryFormValues {
   title: string;
   emotions: string[];
@@ -43,7 +53,17 @@ export default function AddDiaryEntryForm({
 
   const emotionsQuery = useQuery({
     queryKey: ["diary", "emotions"],
-    queryFn: () => getEmotions({ limit: 100 }),
+    queryFn: async () => {
+      const response = (await getEmotions({ limit: 100 })) as EmotionApiResponse;
+      const emotions = Array.isArray(response)
+        ? response
+        : response.emotions ?? response.tasks ?? [];
+
+      return emotions.map(({ _id, name, title }) => ({
+        _id,
+        title: title ?? name ?? "",
+      }));
+    },
     retry: false,
   });
 
