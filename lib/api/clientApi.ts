@@ -70,12 +70,12 @@ export const updateTaskStatus = async (
 };
 
 export const createDiaryEntry = async (data: CreateDiaryEntryRequest) => {
-  const response = await api.post("/diary", data);
+  const response = await proxyApi.post("/diary", data);
   return response.data;
 };
 
 export const getDiary = async (params?: GetDiaryParams) => {
-  const response = await api.get("/diary", { params });
+  const response = await proxyApi.get("/diary", { params });
   return response.data;
 };
 
@@ -83,12 +83,12 @@ export const updateDiaryEntry = async (
   noteId: string,
   data: UpdateDiaryEntryRequest,
 ) => {
-  const response = await api.patch(`/diary/${noteId}`, data);
+  const response = await proxyApi.patch(`/diary/${noteId}`, data);
   return response.data;
 };
 
 export const deleteDiaryEntry = async (noteId: string) => {
-  const response = await api.delete(`/diary/${noteId}`);
+  const response = await proxyApi.delete(`/diary/${noteId}`);
   return response.data;
 };
 
